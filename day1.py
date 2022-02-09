@@ -9,6 +9,6 @@ def main():
     r = float(input("What is the annual interest rate? "))
     r = r / 100
     l = int(input("How many months to pay off the loan? "))
-    print(f"The monthly payment amount is ${paymentCalculator(p, r, l)}")
+    print("The monthly payment amount is ${}".format(paymentCalculator(p, r, l)))
 
 main()

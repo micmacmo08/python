@@ -37,7 +37,7 @@ def main():
     i = int(input("How many strings would you like to check as palindromes? "))
     responses = ['' for n in range(i)]
     for n in range(i):
-        responses[n] = (input(f"Please enter string #{n+1}:\n"))
+        responses[n] = (input("Please enter string #{}:\n".format(n+1)))
     answers = [palindrome(s) for s in responses]
     print(' '.join(answers))
 
@@ -74,11 +74,11 @@ def main():
 
     #day_2_c
     room = ["Alice", "Billy", "Charlie", "Dave"]
-    print(f"The people in the room are {room}")
+    print("The people in the room are {}".format(", ".join(room)))
     mobOrCrowdTest(room)
     room.remove("Dave")
     room.remove("Charlie")
-    print(f"Charlie and Dave have been removed from the room")
+    print("Charlie and Dave have been removed from the room")
     mobOrCrowdTest(room)
     room.append("Charlie")
     room.append("Dave")
