@@ -23,7 +23,7 @@ def is_even(x):
 def greaterThan(x, y):
     return(x > y)
 #7
-def sum(*argv):
+def add(*argv):
     ans = 0
     for arg in argv:
         ans += arg
@@ -74,7 +74,7 @@ print(greaterThan(6,7))
 print(greaterThan(6,6))
 print(greaterThan(6,5))
 print("\nRunning #7 using 1,2,3,4,5,6")
-print(sum(1,2,3,4,5,6))
+print(add(1,2,3,4,5,6))
 print("\nRunning #8 using 4,7,16,5,19,20")
 print(evenFilter(4,7,16,5,19,20))
 print("\nRunning #9 using the string 'This is an obnoxious way to type")
@@ -90,3 +90,24 @@ print(func12(3))
 print(func12(9))
 print("\nRunning #13")
 print(func13("this is a test"))
+
+#coding exercise 9
+bookOrders = [
+    [34587, 'Learning Python, Mark Lutz', 4, 40.95],
+    [98762, 'Programming Python, Mark Lutz', 5, 56.80],
+    [77226, 'Head First Python, Paul Barry', 3, 32.95],
+    [88112, 'Einfuhrung in Python3, Bernd Klein', 3, 24.99]]
+
+bookOrder = [6769, 
+    (34587, 4, 40.95),
+    (98762, 5, 56.80),
+    (77226, 3, 32.95),
+    (88112, 3, 24.99)]
+
+orderTotal = lambda l: (l[0], round(l[2] * l[3] + 10, 2)) if l[2] * l[3] < 100 else (l[0], round(l[2] * l[3],2))
+orderTotal2 = lambda l: (l[0], sum(t[1] * t[2] for t in l[1:]))
+print("\nRunning Coding Exercise 9 part 1")
+for order in bookOrders:
+    print(orderTotal(order))
+print("\nRunning Coding Exercise 9 part 2")
+print(orderTotal2(bookOrder))
