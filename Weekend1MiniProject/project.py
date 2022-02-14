@@ -5,7 +5,11 @@ import sys
 
 months = {'january': 1, 'february': 2, 'march': 3, 'april': 4, 'may': 5, 'june':6, 'july':7, 'august':8, 'september':9, 'october':10, 'november':11, 'december':12}
 
-logging.basicConfig(filename='project.log', level=logging.INFO)
+logging.basicConfig(
+    filename='project.log', 
+    format='%(asctime)s %(levelname)-8s %(message)s',
+    level=logging.INFO,
+    datefmt='%Y-%m-%d %H:%M:%S')
 
 #get user input and loop until successful
 while True:
@@ -19,13 +23,13 @@ while True:
         wb = openpyxl.load_workbook(filename)
         break
     except:
-        print("\nIncorrect input, try again\n")
+        print("\nInvalid entry. Try again\n")
 
 ws = wb["Summary Rolling MoM"]
 headers = [cell.value for cell in ws[1] if cell.value is not None] #grab the headers from the first row
 data = ()
 
-
+#pull the data
 try:
     for row in ws.iter_rows(min_row = 2, values_only=True): #iterate through the rows, starting with the second row, to find the row with the correct month and save that data
         r = []
@@ -42,7 +46,7 @@ except:
     sys.exit(1)
 
 #log the data
-logging.info("MONTH: {}".format(month.upper()))
+logging.info("MONTH: {} from {}".format(month.upper(), filename))
 for i in range(len(headers)):
     #cut off white space at beginning or end of headers
     if headers[i][0] == ' ':

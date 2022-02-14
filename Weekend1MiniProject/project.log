@@ -1,6 +1,6 @@
-INFO:root:MONTH: JANUARY
-INFO:root:Calls Offered: 16,915
-INFO:root:Abandon after 30s: 2.32%
-INFO:root:FCR: 86.50%
-INFO:root:DSAT: 14.20%
-INFO:root:CSAT: 78.30%
+2022-02-14 15:58:57 INFO     MONTH: FEBRUARY from expedia_report_monthly_march_2018.xlsx
+2022-02-14 15:58:57 INFO     Calls Offered: 17,342
+2022-02-14 15:58:57 INFO     Abandon after 30s: 1.35%
+2022-02-14 15:58:57 INFO     FCR: 88.60%
+2022-02-14 15:58:57 INFO     DSAT: 12.40%
+2022-02-14 15:58:57 INFO     CSAT: 78.00%
