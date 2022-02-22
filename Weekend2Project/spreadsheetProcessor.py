@@ -28,7 +28,13 @@ workingDir = 'F:\\Users\\Mike\\OneDrive\\Documents\\GitHub\\Python\\Weekend2Proj
 
 def processSheet(file, logger):
     wb = load_workbook(workingDir + file)
-    ws = wb["Summary Rolling MoM"]
+    
+    #get info from 'Summary Rolling MoM'
+    try:
+        ws = wb["Summary Rolling MoM"]
+    except:
+        logger.info("Sheet titled 'Summary Rolling MoM' not found")
+        return 'Error'
 
     month, year = split('expedia_report_monthly_|_|.xlsx', file)[1:-1]
     data = ()
@@ -49,21 +55,14 @@ def processSheet(file, logger):
     except:
         logger.info("Month not found in 'Summary Rolling MoM'")
         return 'Error'
-
-    logger.info("------------------------------")
-    logger.info("MONTH: {}".format(month.upper()))
-    for i in range(len(headers)):
-        #cut off white space at beginning or end of headers
-        if headers[i][0] == ' ':
-            headers[i] = headers[i][1:]
-        if headers[i][-1] == ' ':
-            headers[i] = headers[i][:-1]
-        if type(data[i+1]) is int:
-            logger.info("{}: {:,}".format(headers[i], data[i+1])) #data is offset by one due to there not being a header for the month
-        else:
-            logger.info("{}: {:.2%}".format(headers[i], data[i+1])) #data is offset by one due to there not being a header for the month
     
-    ws = wb["VOC Rolling MoM"]
+    #get info from 'VOC Rolling MoM'
+    try:
+        ws = wb["VOC Rolling MoM"]
+    except:
+        logger.info("Sheet titled 'VOC Rolling MoM' not found")
+        return 'Error' 
+
     index = 0
     found = False
     for cell in ws[1]:
@@ -102,6 +101,19 @@ def processSheet(file, logger):
         logger.info('Dectractors not found in VOC Rolling MoM')
         return 'Error'
     
+    #log all the info
+    logger.info("------------------------------")
+    logger.info("MONTH: {}".format(month.upper()))
+    for i in range(len(headers)):
+        #cut off white space at beginning or end of headers
+        if headers[i][0] == ' ':
+            headers[i] = headers[i][1:]
+        if headers[i][-1] == ' ':
+            headers[i] = headers[i][:-1]
+        if type(data[i+1]) is int:
+            logger.info("{}: {:,}".format(headers[i], data[i+1])) #data is offset by one due to there not being a header for the month
+        else:
+            logger.info("{}: {:.2%}".format(headers[i], data[i+1])) #data is offset by one due to there not being a header for the month
     logger.info("Promoters: {} ({})".format(promoters, goodOrBad(promoters,promoterMin)))
     logger.info("Passives: {} ({})".format(passives, goodOrBad(passives,passiveMin)))
     logger.info("Dectractors: {} ({})".format(dectractors, goodOrBad(dectractorMin,promoterMin)))
